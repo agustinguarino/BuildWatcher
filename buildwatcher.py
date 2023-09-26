@@ -7,5 +7,9 @@ driver = webdriver.Chrome()
 driver.get(util.URL)
 sleep(10)
 
-build_number = driver.find_element(By.XPATH, util.BuildData).text
-print(build_number)
+for field in util.BuildFields.keys():
+    field_data = driver.find_element(By.XPATH, util.BuildFields[field]).text
+    util.BuildInformation[field] = field_data
+    sleep(1)
+
+print(util.BuildInformation)
