@@ -1,6 +1,6 @@
 URL = "https://buildconsole.ulti.io/dashboard/5f1aff213e485000169e317c/builds?page=0&pagesize=20"
 
-LastBuildRow = "//tbody[@role='rowgroup']//tr[1]"
+LastBuildRow = "//tbody[@role='rowgroup']//tr[4]"
 BuildFields = {
     "BuildData": f"{LastBuildRow}//td[1]",
     "DataVersion" : f"{LastBuildRow}//td[2]",
@@ -17,7 +17,10 @@ BuildFields = {
     "BuildWFNHCMCoreUnifStatus" : f"{LastBuildRow}//td[13]",
     "BuildRwdsTalentTimeStatus" : f"{LastBuildRow}//td[14]",
     "BuildUESStatus" : f"{LastBuildRow}//td[15]",
-    "BuildReleaseCandidateStatus" : f"{LastBuildRow}//td[16]"
+    "BuildReleaseCandidateStatus" : f"{LastBuildRow}//td[16]",
 }
+
+RunTestsButton = "//li[@class='clickable fail ng-star-inserted'][1]//strong"
+ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}

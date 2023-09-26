@@ -13,3 +13,15 @@ for field in util.BuildFields.keys():
     sleep(1)
 
 print(util.BuildInformation)
+
+for field in util.BuildInformation.keys():
+    if "FAILURE" in util.BuildInformation[field]:
+        driver.find_element(By.XPATH, f"{util.BuildFields[field]}//div//span").click()
+        print("After clicking FAILURE field")
+        sleep(5)
+        driver.find_element(By.XPATH, util.RunTestsButton).click()
+        print("After clicking Run Tests button")
+        sleep(1)
+        driver.find_element(By.XPATH, util.ViewInTeamCityButton).click()
+        print("After clicking View In Teamcity button")
+        sleep(20)
