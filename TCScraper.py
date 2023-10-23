@@ -6,21 +6,13 @@ import Util as Util
 #urls = ["http://teamcity.dev.us.corp/buildConfiguration/UltiPro_V12_4Integration_1Domains_Gate0_00RunTests/52463296?buildTab=tests&status=failed"]
 urls = ["http://teamcity.dev.us.corp/buildConfiguration/UltiPro_V12_4Integration_1Domains_Ues_00RunTests/52453001?buildTab=tests&status=failed"]
 driver = webdriver.Chrome()
-FirstRun = True
 failure_elements = []
-arrow_elements = []
 
 for url in urls:
+    print("Sleeping for 45 secs")
+    sleep(45)
     driver.get(url)
-
-    #############################
-    if FirstRun:
-        FirstRun = False
-        print("Sleeping for 45 secs")
-        sleep(45)
-        driver.get(url)
-        print("After sleeping")
-    #############################
+    print("After sleeping")
 
     print("Starting scraping")
     sleep(5)
