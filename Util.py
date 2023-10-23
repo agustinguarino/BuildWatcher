@@ -24,3 +24,5 @@ RunTestsButton = "//li[@class='clickable fail ng-star-inserted'][1]//strong"
 ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}
+
+Failure_Elements_XPATH = "//div[@class='TestItem__expandable--KK TestItemAdvanced__row--pF']/div[@class='TestItemAdvanced__nameColumn--eG']/span/div/div/a"
