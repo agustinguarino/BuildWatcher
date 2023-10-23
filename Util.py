@@ -25,4 +25,5 @@ ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}
 
-Failure_Elements_XPATH = "//div[@class='TestItem__expandable--KK TestItemAdvanced__row--pF']/div[@class='TestItemAdvanced__nameColumn--eG']/span/div/div/a"
+Failure_Elements_XPATH = "//div[@class='TestItemAdvanced__nameColumn--eG']"
+Expand_Failure_Arrow_XPATH = "//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC']"
