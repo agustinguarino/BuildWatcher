@@ -21,7 +21,7 @@ for url in urls:
 
     print("Starting scraping")
     sleep(5)
-    failure_elements = driver.find_elements(By.XPATH, Util.Failure_Elements_XPATH)
+    failure_elements = driver.find_elements(By.XPATH, "//div[@class='TestItem__expandable--KK TestItemAdvanced__row--pF']") # Util.Failure_Elements_XPATH
     print(f"Errors detected: {str(len(failure_elements))}")
     print("Ending scraping")
 
@@ -32,6 +32,8 @@ for i in range (0, len(failure_elements)):
     arrow_down = driver.find_element(By.XPATH, f"(//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC'])[{str(i + 1)}]")
     driver.execute_script("arguments[0].click();", arrow_down)
     sleep(1)
+
+    # Get test name
     test_name = driver.find_element(By.XPATH, f"(//a[@data-test-build-test-name-part='name'])[{str(i + 1)}]").text
     
     # Get package name if present
@@ -47,6 +49,12 @@ for i in range (0, len(failure_elements)):
         
     except Exception:
         flaky_test = False
+
+    # Get test duration if present
+    try:
+        duration = driver.find_element(By.XPATH, Util.Test_Duration_XPATH).text
+    except Exception:
+        duration = "0"
 
     ## Make package optional (some tests dont have the element)
     ## Check for flaky tag
