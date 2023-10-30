@@ -28,3 +28,4 @@ BuildInformation = {}
 Failure_Elements_XPATH = "//div[@class='TestItemAdvanced__nameColumn--eG']"
 Expand_Failure_Arrow_XPATH = "//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC']"
 Flaky_Test_Indicator_XPATH = "//div[@class='TestItemAdvanced__flakyLabel--Vn']"
+Test_Duration_XPATH = "//div[@class='TestItemAdvanced__durationColumn--n8']//span[@class='ring-button-content']"
