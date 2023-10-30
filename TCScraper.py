@@ -3,13 +3,14 @@ from selenium.webdriver.common.by import By
 from time import sleep
 import Util as Util
 
-#urls = ["http://teamcity.dev.us.corp/buildConfiguration/UltiPro_V12_4Integration_1Domains_Gate0_00RunTests/52463296?buildTab=tests&status=failed"]
-urls = ["http://teamcity.dev.us.corp/buildConfiguration/UltiPro_V12_4Integration_1Domains_Ues_00RunTests/52453001?buildTab=tests&status=failed"]
+urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52499069?buildTab=tests&status=failed"]
 driver = webdriver.Chrome()
 failure_elements = []
 
 for url in urls:
     driver.get(url)
+
+    ## Automate process until get to password and PingID code needed
 
     print("Sleeping for 45 secs")
     sleep(45)
@@ -25,14 +26,31 @@ for url in urls:
     print("Ending scraping")
 
 
+# For each error element found in TeamCity
 for i in range (0, len(failure_elements)):
     print("Arrive")
     arrow_down = driver.find_element(By.XPATH, f"(//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC'])[{str(i + 1)}]")
     driver.execute_script("arguments[0].click();", arrow_down)
     sleep(1)
     test_name = driver.find_element(By.XPATH, f"(//a[@data-test-build-test-name-part='name'])[{str(i + 1)}]").text
-    package = driver.find_element(By.XPATH, f"(//a[@data-test-build-test-name-part='package'])[{str(i + 1)}]").text
+    
+    # Get package name if present
+    try:
+        package = driver.find_element(By.XPATH, f"(//a[@data-test-build-test-name-part='package'])[{str(i + 1)}]").text
+    except Exception:
+        package = "No package found."
+
+    # Get flaky test inficator if present
+    try:
+        flaky_test_indicator = driver.find_element(By.XPATH, Util.Flaky_Test_Indicator_XPATH).text
+        if flaky_test_indicator == "flaky": flaky_test = True
+        
+    except Exception:
+        flaky_test = False
+
+    ## Make package optional (some tests dont have the element)
+    ## Check for flaky tag
     stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text
-    print(f"{test_name} // {package} // {stacktrace}")
+    print(f"{test_name}  // {stacktrace[:500]}")
     sleep(0.5)
     
