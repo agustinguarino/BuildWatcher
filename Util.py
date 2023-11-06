@@ -25,9 +25,16 @@ ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}
 
+Login_Page_Indicator_XPATH = "//a[contains(text(), 'Login with SSO')]"
+HomePage_Indicator_XPATH = "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]"
 Failure_Elements_XPATH = "//div[@class='TestItemAdvanced__nameColumn--eG']"
-Expand_Failure_Arrow_XPATH = "//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC']"
-Flaky_Test_Indicator_XPATH = "//div[@class='TestItemAdvanced__flakyLabel--Vn']"
+#Expand_Failure_Arrow_XPATH = "//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC']"
+Arrow_Down_XPATH = "(//div[@class='Details__heading--id TestItem__heading--Xx TestItem__expandable--KK']/span[@class='ring-icon-icon SvgIcon__icon--wZ TestItem__arrow--TC'])[(iterator)]"
+Test_Name_XPATH = "(//a[@data-test-build-test-name-part='name'])[(iterator)]"
+Package_Name_XPATH = "(//a[@data-test-build-test-name-part='package'])[(iterator)]"
+Secondary_Package_XPATH = "(//div[@class='TestItemAdvanced__nameColumn--eG'])[(iterator)]//span[@class='TestName__suite--fP']"
+#Flaky_Test_Indicator_XPATH = "//div[@class='TestItemAdvanced__flakyLabel--Vn']"
+Flaky_Test_Indicator_XPATH = "(//div[@class='TestItemAdvanced__nameColumn--eG'])[(iterator)]//span[@class='TestFlakyLabel__label--M5']"
 Test_Duration_XPATH = "//div[@class='TestItemAdvanced__durationColumn--n8']//span[@class='ring-button-content']"
 
 
