@@ -44,5 +44,7 @@ Test_Duration_XPATH = "//div[@class='TestItemAdvanced__durationColumn--n8']//spa
 
 Pipeline_Name_XPATH = "//span[@class='mat-select-min-line ng-tns-c154-2 ng-star-inserted']"
 Builds_Table_Row_XPATH = "(//tbody[@role='rowgroup']//tr)[(iterator)]"
+Build_Number_XPATH = Builds_Table_Row_XPATH + "//td//a[@style='text-decoration: unset; color: #3f51b5;']"
+Build_Date_XPATH = Builds_Table_Row_XPATH + "//td//span[@style='font-size: 12px;']"
 Run_Tests_Button_XPATH = "//li[@class='clickable fail ng-star-inserted']"
 View_TeamCity_Button_XPATH = "//a[@class='mat-focus-indicator mat-button mat-button-base']"
