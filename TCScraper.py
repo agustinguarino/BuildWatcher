@@ -56,9 +56,14 @@ for i in range (0, len(failure_elements)):
     except Exception:
         duration = "0"
 
+    # Get stacktrace error
+    try:
+        stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text
+    except Exception:
+        stacktrace = "No stacktrace."
+
     ## Make package optional (some tests dont have the element)
     ## Check for flaky tag
-    stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text
-    print(f"{test_name}  // {stacktrace[:500]}")
+    print(f"{test_name}")
     sleep(0.5)
     
