@@ -11,8 +11,7 @@ driver = webdriver.Chrome()
 
 urls = {}
 
-def getBuildConsoleUrls():
-    page_size = 6
+def getBuildConsoleUrls(page_size):
     url = f"https://buildconsole.ulti.io/dashboard/64e62b8a1aa339d31db3edf1/builds?page=0&pagesize={page_size}"
     driver.get(url)
     pipeline = WebDriverWait(driver, 20).until(visibility_of_element_located((By.XPATH, Util.Pipeline_Name_XPATH))).text
