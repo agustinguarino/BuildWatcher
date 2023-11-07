@@ -6,15 +6,22 @@ from time import sleep
 import Util as Util
 import xlsxwriter as xlsx
 import os
+import BuildConsoleScraper as bcs
 
-urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52530534?buildTab=tests&status=failed"]
+urls = bcs.getBuildConsoleUrls(51)
+for key in urls.keys():
+    print(str(key))
+#urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52530534?buildTab=tests&status=failed"]
 #urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52739671?buildTab=tests&status=failed"]
 driver = webdriver.Chrome()
-failure_elements = []
-column = 0
-row = 0
 
-for url in urls:
+for key in urls.keys():
+    url = urls[str(key)]
+    failure_elements = []
+
+    build_number = str(key).split("/*/")[0]
+    build_date = str(key).split("/*/")[1]
+
     driver.get("https://teamcity.dev.us.corp/favorite/projects")
 
     ## Automate process until get to password and PingID code needed
@@ -32,60 +39,65 @@ for url in urls:
     failure_elements = driver.find_elements(By.XPATH, "//div[@class='TestItem__expandable--KK TestItemAdvanced__row--pF']") # Util.Failure_Elements_XPATH
     print(f"Errors detected: {str(len(failure_elements))}")
 
+    # For each error element found in TeamCity
+    for i in range (0, len(failure_elements)):
+        print("Arrive")
 
-# For each error element found in TeamCity
-for i in range (0, len(failure_elements)):
-    print("Arrive")
-    arrow_down = driver.find_element(By.XPATH, Util.Arrow_Down_XPATH.replace("(iterator)", str(i + 1)))
-    driver.execute_script("arguments[0].click();", arrow_down)
-    sleep(0.3)
-
-    # Get test name
-    test_name = driver.find_element(By.XPATH, Util.Test_Name_XPATH.replace("(iterator)", str(i + 1))).text.replace(",", ";")
-    
-    # Get package name if present
-    try:
-        package = driver.find_element(By.XPATH, Util.Package_Name_XPATH.replace("(iterator)", str(i + 1))).text.replace(",", ";")
-    except Exception:
         try:
-            package = driver.find_element(By.XPATH, Util.Secondary_Package_XPATH.replace("(iterator)", str(i + 1))).text.split(":")[0].replace(",", ";")
+            arrow_down = driver.find_element(By.XPATH, Util.Arrow_Down_XPATH.replace("(iterator)", str(i + 1)))
+            driver.execute_script("arguments[0].click();", arrow_down)
         except Exception:
-            package = "No package found."
+            print("Error when trying to click arrow down")
 
-    # Get flaky test inficator if present
-    try:
-        flaky_test_indicator = driver.find_element(By.XPATH, Util.Flaky_Test_Indicator_XPATH.replace("(iterator)", str(i + 1))).text
-        if flaky_test_indicator == "flaky": flaky_test = "True"
+        sleep(0.3)
+
+        # Get test name
+        test_name = driver.find_element(By.XPATH, Util.Test_Name_XPATH.replace("(iterator)", str(i + 1))).text
         
-    except Exception:
-        flaky_test = "False"
+        # Get package name if present
+        try:
+            package = driver.find_element(By.XPATH, Util.Package_Name_XPATH.replace("(iterator)", str(i + 1))).text
+        except Exception:
+            try:
+                package = driver.find_element(By.XPATH, Util.Secondary_Package_XPATH.replace("(iterator)", str(i + 1))).text.split(":")[0]
+            except Exception:
+                package = "No package found."
 
-    # Get test duration if present
-    try:
-        duration = driver.find_element(By.XPATH, Util.Test_Duration_XPATH).text.replace(",", ";")
-    except Exception:
-        duration = "0"
+        # Get flaky test inficator if present
+        try:
+            flaky_test_indicator = driver.find_element(By.XPATH, Util.Flaky_Test_Indicator_XPATH.replace("(iterator)", str(i + 1))).text
+            if flaky_test_indicator == "flaky": flaky_test = "True"
+            
+        except Exception:
+            flaky_test = "False"
 
-    # Get stacktrace error
-    try:
-        #stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text[:250].replace("\n", "")
-        stacktrace = driver.find_element(By.XPATH, "//div[@data-test-build-log-messages='true']").text[:250].replace(",", ";")
-    except Exception:
-        stacktrace = "No stacktrace."
+        # Get test duration if present
+        try:
+            #duration = driver.find_element(By.XPATH, Util.Test_Duration_XPATH).text.replace(",", ";")
+            duration = driver.find_element(By.XPATH, Util.Test_Duration_XPATH.replace("(iterator)", str(i + 1))).text
+        except Exception:
+            duration = "0"
 
-    ## Make package optional (some tests dont have the element)
-    ## Check for flaky tag
-    print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:200]}")
-    sleep(0.3)
+        # Get stacktrace error
+        try:
+            #stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text[:250].replace("\n", "")
+            stacktrace = driver.find_element(By.XPATH, "//div[@data-test-build-log-messages='true']").text[:250]
+        except Exception:
+            stacktrace = "No stacktrace."
 
-    # Write in csv
-    #wb = xlsx.Workbook('data.xlsx')
-    #ws = wb.add_worksheet()
+        ## Make package optional (some tests dont have the element)
+        ## Check for flaky tag
+        print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:200]}")
+        sleep(0.3)
 
-    #data = [test_name, package, flaky_test, duration, stacktrace[:200]]
-    data = f"{test_name}, {package}, {flaky_test}, {duration}, {stacktrace}"
-    #ws.write_row(row, column, tuple(data))
-    #row += 1
+        # Write in csv
+        #wb = xlsx.Workbook('data.xlsx')
+        #ws = wb.add_worksheet()
 
-    with open("errors.csv", "a") as file:
-        file.write(data.replace("\n", "") + "\n")
+        #data = [test_name, package, flaky_test, duration, stacktrace[:200]]
+        data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {flaky_test}|| {duration}|| {stacktrace}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
+        #ws.write_row(row, column, tuple(data))
+        #row += 1
+
+        with open("errors.csv", "a") as file:
+            file.write(data)
