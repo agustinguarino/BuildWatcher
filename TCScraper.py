@@ -15,6 +15,11 @@ for key in urls.keys():
 #urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52739671?buildTab=tests&status=failed"]
 driver = webdriver.Chrome()
 
+
+headers = "Build #, Build Date, Test Name, Package, Flaky Test, Duration, Stacktrace, Error Category"
+with open("errors.csv", "a") as file:
+            file.write(headers)
+
 for key in urls.keys():
     url = urls[str(key)]
     failure_elements = []
@@ -52,7 +57,10 @@ for key in urls.keys():
         sleep(0.3)
 
         # Get test name
-        test_name = driver.find_element(By.XPATH, Util.Test_Name_XPATH.replace("(iterator)", str(i + 1))).text
+        try:
+            test_name = driver.find_element(By.XPATH, Util.Test_Name_XPATH.replace("(iterator)", str(i + 1))).text
+        except Exception:
+            print("Error when trying to get test name.")
         
         # Get package name if present
         try:
