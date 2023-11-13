@@ -4,15 +4,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located
 from time import sleep
 import Util as Util
-import xlsxwriter as xlsx
-import os
 import BuildConsoleScraper as bcs
 
 urls = bcs.getBuildConsoleUrls(25)
 for key in urls.keys():
     print(str(key))
-#urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52530534?buildTab=tests&status=failed"]
-#urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52739671?buildTab=tests&status=failed"]
+
 driver = webdriver.Chrome()
 
 
@@ -82,14 +79,12 @@ for key in urls.keys():
 
         # Get test duration if present
         try:
-            #duration = driver.find_element(By.XPATH, Util.Test_Duration_XPATH).text.replace(",", ";")
             duration = driver.find_element(By.XPATH, Util.Test_Duration_XPATH.replace("(iterator)", str(i + 1))).text
         except Exception:
             duration = "0"
 
         # Get stacktrace error
         try:
-            #stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text[:250].replace("\n", "")
             stacktrace = driver.find_element(By.XPATH, "//div[@data-test-build-log-messages='true']").text[:250]
 
             for error in Util.Error_Types_List:
@@ -102,19 +97,11 @@ for key in urls.keys():
         except Exception:
             stacktrace = "No stacktrace."
 
-        ## Make package optional (some tests dont have the element)
-        ## Check for flaky tag
         print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:500]}")
         sleep(0.3)
 
         # Write in csv
-        #wb = xlsx.Workbook('data.xlsx')
-        #ws = wb.add_worksheet()
-
-        #data = [test_name, package, flaky_test, duration, stacktrace[:200]]
         data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {flaky_test}|| {duration}|| {stacktrace}|| {error_category}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
-        #ws.write_row(row, column, tuple(data))
-        #row += 1
 
         with open("errors.csv", "a") as file:
             file.write(data)
