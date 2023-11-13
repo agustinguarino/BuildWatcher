@@ -25,7 +25,7 @@ ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}
 
-Error_Types_List = ["SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException"]
+Error_Types_List = ["SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException", "RecordCountNotEqualException", "NoSuchEnvironmentException"]
 
 Login_Page_Indicator_XPATH = "//a[contains(text(), 'Login with SSO')]"
 HomePage_Indicator_XPATH = "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]"
