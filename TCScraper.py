@@ -8,7 +8,7 @@ import xlsxwriter as xlsx
 import os
 import BuildConsoleScraper as bcs
 
-urls = bcs.getBuildConsoleUrls(51)
+urls = bcs.getBuildConsoleUrls(25)
 for key in urls.keys():
     print(str(key))
 #urls = ["https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/52530534?buildTab=tests&status=failed"]
@@ -16,13 +16,14 @@ for key in urls.keys():
 driver = webdriver.Chrome()
 
 
-headers = "Build #, Build Date, Test Name, Package, Flaky Test, Duration, Stacktrace, Error Category"
+headers = "Build #, Build Date, Test Name, Package, Flaky Test, Duration, Stacktrace, Error Category" + "\n"
 with open("errors.csv", "a") as file:
             file.write(headers)
 
 for key in urls.keys():
     url = urls[str(key)]
     failure_elements = []
+    error_category = ""
 
     build_number = str(key).split("/*/")[0]
     build_date = str(key).split("/*/")[1]
@@ -90,12 +91,20 @@ for key in urls.keys():
         try:
             #stacktrace = driver.find_element(By.XPATH, f"//div[@class='BuildLogMessages__messages--MP']").text[:250].replace("\n", "")
             stacktrace = driver.find_element(By.XPATH, "//div[@data-test-build-log-messages='true']").text[:250]
+
+            for error in Util.Error_Types_List:
+                if error.lower() in stacktrace.lower():
+                    error_category = error
+            
+            if error_category is None or error_category is "":
+                error_category = "No error category found."
+
         except Exception:
             stacktrace = "No stacktrace."
 
         ## Make package optional (some tests dont have the element)
         ## Check for flaky tag
-        print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:200]}")
+        print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:500]}")
         sleep(0.3)
 
         # Write in csv
@@ -103,7 +112,7 @@ for key in urls.keys():
         #ws = wb.add_worksheet()
 
         #data = [test_name, package, flaky_test, duration, stacktrace[:200]]
-        data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {flaky_test}|| {duration}|| {stacktrace}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
+        data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {flaky_test}|| {duration}|| {stacktrace}|| {error_category}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
         #ws.write_row(row, column, tuple(data))
         #row += 1
 
