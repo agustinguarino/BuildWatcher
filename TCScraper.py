@@ -14,7 +14,7 @@ for key in urls.keys():
 driver = webdriver.Chrome()
 
 
-headers = "Build #, Build Date, Test Name, Package, Flaky Test, Duration, Stacktrace, Error Category" + "\n"
+headers = "Build #, Build Date, Test Name, Package, Team, Flaky Test, Duration, Stacktrace, Error Category" + "\n"
 with open("errors.csv", "a") as file:
             file.write(headers)
 
@@ -45,7 +45,9 @@ for key in urls.keys():
     # For each error element found in TeamCity
     for i in range (0, len(failure_elements)):
         print("Arrive")
+
         error_category = "No error category found."
+        package_team = "No team found for this package."
 
         try:
             arrow_down = driver.find_element(By.XPATH, Util.Arrow_Down_XPATH.replace("(iterator)", str(i + 1)))
@@ -69,6 +71,11 @@ for key in urls.keys():
                 package = driver.find_element(By.XPATH, Util.Secondary_Package_XPATH.replace("(iterator)", str(i + 1))).text.replace("C:\\Projects\\UltiPro.NET\\distrib\\", "").split(":")[0]
             except Exception:
                 package = "No package found."
+
+        # Get team name from package
+        for team in Util.Teams_List:
+            if team in package:
+                package_team = team
 
         # Get flaky test inficator if present
         try:
@@ -95,11 +102,11 @@ for key in urls.keys():
         except Exception:
             stacktrace = "No stacktrace."
 
-        print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:500]}")
+        print(f"{test_name} // {package} // {flaky_test} // {duration} // {stacktrace[:750]}")
         sleep(0.3)
 
         # Write in csv
-        data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {flaky_test}|| {duration}|| {stacktrace}|| {error_category}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
+        data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {package_team}|| {flaky_test}|| {duration}|| {stacktrace}|| {error_category}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
 
         with open("C:\Projects\BuildWatcher\errors.csv", "a") as file:
             file.write(data)

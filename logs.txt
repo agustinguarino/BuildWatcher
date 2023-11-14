@@ -1,0 +1,213 @@
+P0s Pipeline
+22.0.0.43041/*/11/13/2023 04:00:34 PM
+22.0.0.43040/*/11/13/2023 02:00:37 PM
+22.0.0.43039/*/11/13/2023 10:00:16 AM
+22.0.0.43038/*/11/13/2023 06:00:46 AM
+22.0.0.43037/*/11/12/2023 08:00:22 PM
+22.0.0.43036/*/11/10/2023 08:00:30 PM
+Errors detected: 1
+Arrive
+HireAnEmployeeWithUsePayScaleDisabled_PayScaleAndStepNoProvided // UltimateSoftware.Foundation.Services.AcceptanceGHR.Tests.dll // False // 14s 960ms // System.Data.SqlClient.SqlException : Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+  
+Errors detected: 1
+Arrive
+HireAnEmployeeWithUsePayScaleDisabled_PayScaleAndStepNoProvided // UltimateSoftware.Foundation.Services.AcceptanceGHR.Tests.dll // False // 16s 262ms // System.Data.SqlClient.SqlException : Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+  
+Errors detected: 11
+Arrive
+BenefitsHubImportSPIsInvokedWhenDataExistsForBenefitsHub // UltimateSoftware.Payroll.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Cannot open database "ULTIPRO_CALENDAR" requested by the login. The login failed.
+Login failed for user 'DEV'.
+at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbCo
+Arrive
+BothDIPPAndBenefitsHubSPsAreInvokedWhenDataExistsFromBothSourcesInSameRequest // UltimateSoftware.Payroll.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Cannot open database "ULTIPRO_CALENDAR" requested by the login. The login failed.
+Login failed for user 'DEV'.
+at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbCo
+Arrive
+DIPPImportSPIsInvokedWhenDataExistsForDIPP // UltimateSoftware.Payroll.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Cannot open database "ULTIPRO_CALENDAR" requested by the login. The login failed.
+Login failed for user 'DEV'.
+at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbCo
+Arrive
+NoTimeClockDataIsReturnedWhenNoDataExistsForBenefitsHubOrDIPP // UltimateSoftware.Payroll.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Cannot open database "ULTIPRO_CALENDAR" requested by the login. The login failed.
+Login failed for user 'DEV'.
+at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbCo
+Arrive
+OneTimeClockImportObjectIsCreatedForEachStagingFileType // UltimateSoftware.Payroll.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Cannot open database "ULTIPRO_CALENDAR" requested by the login. The login failed.
+Login failed for user 'DEV'.
+at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbCo
+Arrive
+ValidationSpByGCIDIsCalledForEachFile // UltimateSoftware.Payroll.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Cannot open database "ULTIPRO_CALENDAR" requested by the login. The login failed.
+Login failed for user 'DEV'.
+at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbCo
+Arrive
+No_Rating_Comments_Not_Saved // Echo.Automation.UPM.dll // False // 487ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.NoSuchElementException : The following options were not found: "WebDriver.FindElement(By.CssSelector(input[id$=CompetencySection_btnSection]));".
+  ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"input[id$=CompetencySection_btnSection]"}
+  (Session info: chrome=119.0.6045.124)
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.Execut
+Arrive
+Rating_Scale_Cancel_Button // Echo.Automation.UPM.dll // False // 487ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Cancel_Button() 
+Arrive
+Rating_Scale_Reset_Button // Echo.Automation.UPM.dll // False // 487ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Reset_Button() i
+Arrive
+StarsRating_Caption // Echo.Automation.UPM.dll // False // 487ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "Review Summary" but actual value is "Tom Aquinas - Competencies".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Is(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.StarsRating
+Arrive
+HireAnEmployeeWithUsePayScaleDisabled_PayScaleAndStepNoProvided // UltimateSoftware.Foundation.Services.AcceptanceGHR.Tests.dll // False // 487ms // System.Data.SqlClient.SqlException : Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+  
+Errors detected: 8
+Arrive
+ClosePlanWithErrors // Echo.Automation.GlobalBenefits.CompensationManagement.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 2 minutes, 5 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ElementNotEnabledException : The specified element is not enabled.
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Automation.GlobalBenefits.CompensationManagement.Compensation.CompPlans.CloseCompPlan.ClosePlanWithErrors() in C:\BuildAgent\work\c2c489c091211561\AutomatedTests\Echo\Echo.nunit.Automation.GlobalBenefits.CompensationManagement\C
+Arrive
+CompensationPlanWithNoReviewEndDateShouldNotClose // Echo.Automation.GlobalBenefits.CompensationManagement.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 2 minutes, 5 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.NoSuchElementException : The following options were not found: "WebDriver.FindElement(By.CssSelector(iframe[id*=ContentFrame]));".
+  ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"iframe[id*=ContentFrame]"}
+  (Session info: chrome=119.0.6045.124)
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action com
+Arrive
+PlanIsClosedSuccessfully // Echo.Automation.GlobalBenefits.CompensationManagement.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 2 minutes, 5 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.NoSuchElementException : The following options were not found: "WebDriver.FindElement(By.CssSelector(iframe[id*=ContentFrame]));".
+  ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"iframe[id*=ContentFrame]"}
+  (Session info: chrome=119.0.6045.124)
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action com
+Arrive
+No_Rating_Comments_Not_Saved // Echo.Automation.UPM.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.NoSuchElementException : The following options were not found: "WebDriver.FindElement(By.CssSelector(input[id$=CompetencySection_btnSection]));".
+  ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"input[id$=CompetencySection_btnSection]"}
+  (Session info: chrome=119.0.6045.124)
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.Execut
+Arrive
+Rating_Scale_Cancel_Button // Echo.Automation.UPM.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Cancel_Button() 
+Arrive
+Rating_Scale_Reset_Button // Echo.Automation.UPM.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Reset_Button() i
+Arrive
+StarsRating_Caption // Echo.Automation.UPM.dll // False // 2m 38s 440ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "Review Summary" but actual value is "Tom Aquinas - Competencies".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Is(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.StarsRating
+Arrive
+HireAnEmployeeWithUsePayScaleDisabled_PayScaleAndStepNoProvided // UltimateSoftware.Foundation.Services.AcceptanceGHR.Tests.dll // False // 2m 38s 440ms // System.Data.SqlClient.SqlException : Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+  
+Errors detected: 5
+Arrive
+No_Rating_Comments_Not_Saved // Echo.Automation.UPM.dll // False // 33s 858ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.NoSuchElementException : The following options were not found: "WebDriver.FindElement(By.CssSelector(input[id$=CompetencySection_btnSection]));".
+  ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"input[id$=CompetencySection_btnSection]"}
+  (Session info: chrome=119.0.6045.124)
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.Execut
+Arrive
+Rating_Scale_Cancel_Button // Echo.Automation.UPM.dll // False // 33s 858ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Cancel_Button() 
+Arrive
+Rating_Scale_Reset_Button // Echo.Automation.UPM.dll // False // 33s 858ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Reset_Button() i
+Arrive
+StarsRating_Caption // Echo.Automation.UPM.dll // False // 33s 858ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "Review Summary" but actual value is "Tom Aquinas - Competencies".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Is(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.StarsRating
+Arrive
+HireAnEmployeeWithUsePayScaleDisabled_PayScaleAndStepNoProvided // UltimateSoftware.Foundation.Services.AcceptanceGHR.Tests.dll // False // 33s 858ms // System.Data.SqlClient.SqlException : Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+  
+Errors detected: 5
+Arrive
+No_Rating_Comments_Not_Saved // Echo.Automation.UPM.dll // False // 34s 189ms // No stacktrace.
+Arrive
+Rating_Scale_Cancel_Button // Echo.Automation.UPM.dll // False // 34s 189ms // No stacktrace.
+Arrive
+Rating_Scale_Reset_Button // Echo.Automation.UPM.dll // False // 34s 189ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "3 - Met Expectations" but actual value is "".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Like(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.Rating_Scale_Reset_Button() i
+Arrive
+StarsRating_Caption // Echo.Automation.UPM.dll // False // 34s 189ms // Echo.Core.Common.Exceptions.TimeoutExpiredException : Timeout of 30 seconds expired before operation "Waiting for browser interaction." completed.
+  ----> Echo.Core.Common.Exceptions.Element.ValuesAreNotEqualException : Values are not equal. Expected "Review Summary" but actual value is "Tom Aquinas - Competencies".
+at Echo.Core.CommandExecution.DelegateExceptionHandler.RethrowExceptionHandler.Handle(Exception exceptionToHandle)
+   at Echo.Core.CommandExecution.DelegateRunners.ExceptionHandlingDelegateRunner.ExecuteDelegate(Action commandDelegateWrapper)
+   at Echo.Core.TestAbstraction.WebUIObject.AutomationObject`1.Is(Func`2 selector, String attribute, String expected)
+   at Echo.Automation.UPM.ReviewCompetencies.RatingEmployee.StarsRating
+Arrive
+HireAnEmployeeWithUsePayScaleDisabled_PayScaleAndStepNoProvided // UltimateSoftware.Foundation.Services.AcceptanceGHR.Tests.dll // False // 34s 189ms // System.Data.SqlClient.SqlException : Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+  
