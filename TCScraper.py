@@ -5,8 +5,9 @@ from selenium.webdriver.support.expected_conditions import visibility_of_element
 from time import sleep
 import Util as Util
 import BuildConsoleScraper as bcs
+import sys
 
-urls = bcs.getBuildConsoleUrls(10)
+urls = bcs.getBuildConsoleUrls(sys.argv[1])
 for key in urls.keys():
     print(str(key))
 
