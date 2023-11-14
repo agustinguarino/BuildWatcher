@@ -27,8 +27,12 @@ def getBuildConsoleUrls(page_size):
             sleep(0.3)
             build_selector = Util.Builds_Table_Row_XPATH.replace("(iterator)", str(i + 1)) + "//td"
 
-            build_number = driver.find_element(By.XPATH, Util.Build_Number_XPATH.replace("(iterator)", str(i + 1))).text
-            build_date = driver.find_element(By.XPATH, Util.Build_Date_XPATH.replace("(iterator)", str(i + 1))).text
+            try:
+                build_number = driver.find_element(By.XPATH, Util.Build_Number_XPATH.replace("(iterator)", str(i + 1))).text
+                build_date = driver.find_element(By.XPATH, Util.Build_Date_XPATH.replace("(iterator)", str(i + 1))).text
+            except Exception:
+                build_number = "N/A"
+                build_date = "N/A"
             
             try:
                 ActionChains(driver).send_keys(Keys.ESCAPE).perform()
