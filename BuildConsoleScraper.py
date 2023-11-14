@@ -43,7 +43,8 @@ def getBuildConsoleUrls(page_size):
                 tc_url = driver.find_element(By.XPATH, Util.View_TeamCity_Button_XPATH).get_attribute("href")
 
                 build_id = tc_url.split("buildId=")[1].split("&buildTypeId=")[0]
-                url = f"https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/{build_id}?buildTab=tests&status=failed"
+                #url = f"https://teamcity.dev.us.corp/buildConfiguration/UltiPro_Dev5Quality_4Integration_1Domains_Gate9_00RunTests/{build_id}?buildTab=tests&status=failed"
+                url = f"https://teamcity.dev.us.corp/buildConfiguration/UltiPro_V12_4Integration_1Domains_P0QualityGate_00RunTests/{build_id}?buildTab=tests&status=failed"
 
                 urls[build_number + "/*/" + build_date] = url
 
