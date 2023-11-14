@@ -20,7 +20,7 @@ def getBuildConsoleUrls(page_size):
         print("P0s Pipeline")
         sleep(10)
 
-        for i in range(0, page_size):
+        for i in range(0, int(page_size)):
             sleep(0.3)
             build_selector = Util.Builds_Table_Row_XPATH.replace("(iterator)", str(i + 1)) + "//td"
 
