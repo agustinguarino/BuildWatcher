@@ -25,7 +25,7 @@ ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}
 
-Error_Types_List = ["ElementNotEnabledException", "SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException", "RecordCountNotEqualException", "NoSuchEnvironmentException"]
+Error_Types_List = ["TestFixtureSetUp failed", "ElementNotEnabledException", "SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException", "RecordCountNotEqualException", "NoSuchEnvironmentException"]
 Teams_List = ["AcceptanceGHR", "MobileAppApi", "Payroll", "TaxCare", "TaxUs", "GlobalBenefits", "UPM", "ImportTool"]
 
 Login_Page_Indicator_XPATH = "//a[contains(text(), 'Login with SSO')]"
