@@ -101,5 +101,5 @@ for key in urls.keys():
         # Write in csv
         data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {flaky_test}|| {duration}|| {stacktrace}|| {error_category}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
 
-        with open("errors.csv", "a") as file:
+        with open("C:\Projects\BuildWatcher\errors.csv", "a") as file:
             file.write(data)
