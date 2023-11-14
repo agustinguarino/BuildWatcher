@@ -6,7 +6,7 @@ from time import sleep
 import Util as Util
 import BuildConsoleScraper as bcs
 
-urls = bcs.getBuildConsoleUrls(25)
+urls = bcs.getBuildConsoleUrls(10)
 for key in urls.keys():
     print(str(key))
 
@@ -20,7 +20,6 @@ with open("errors.csv", "a") as file:
 for key in urls.keys():
     url = urls[str(key)]
     failure_elements = []
-    error_category = ""
 
     build_number = str(key).split("/*/")[0]
     build_date = str(key).split("/*/")[1]
@@ -45,6 +44,7 @@ for key in urls.keys():
     # For each error element found in TeamCity
     for i in range (0, len(failure_elements)):
         print("Arrive")
+        error_category = "No error category found."
 
         try:
             arrow_down = driver.find_element(By.XPATH, Util.Arrow_Down_XPATH.replace("(iterator)", str(i + 1)))
@@ -65,7 +65,7 @@ for key in urls.keys():
             package = driver.find_element(By.XPATH, Util.Package_Name_XPATH.replace("(iterator)", str(i + 1))).text
         except Exception:
             try:
-                package = driver.find_element(By.XPATH, Util.Secondary_Package_XPATH.replace("(iterator)", str(i + 1))).text.split(":")[0]
+                package = driver.find_element(By.XPATH, Util.Secondary_Package_XPATH.replace("(iterator)", str(i + 1))).text.replace("C:\\Projects\\UltiPro.NET\\distrib\\", "").split(":")[0]
             except Exception:
                 package = "No package found."
 
@@ -90,9 +90,6 @@ for key in urls.keys():
             for error in Util.Error_Types_List:
                 if error.lower() in stacktrace.lower():
                     error_category = error
-            
-            if error_category is None or error_category is "":
-                error_category = "No error category found."
 
         except Exception:
             stacktrace = "No stacktrace."
