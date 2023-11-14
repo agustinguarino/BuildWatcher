@@ -86,7 +86,7 @@ for key in urls.keys():
 
         # Get stacktrace error
         try:
-            stacktrace = driver.find_element(By.XPATH, "//div[@data-test-build-log-messages='true']").text[:250]
+            stacktrace = driver.find_element(By.XPATH, "//div[@data-test-build-log-messages='true']").text[:800]
 
             for error in Util.Error_Types_List:
                 if error.lower() in stacktrace.lower():
