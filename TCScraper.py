@@ -15,7 +15,7 @@ driver = webdriver.Chrome()
 
 
 headers = "Build #, Build Date, Test Name, Package, Team, Flaky Test, Duration, Stacktrace, Error Category" + "\n"
-with open("errors.csv", "a") as file:
+with open("C:\Projects\BuildWatcher\errors.csv", "a") as file:
             file.write(headers)
 
 for key in urls.keys():
