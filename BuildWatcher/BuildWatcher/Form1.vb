@@ -39,6 +39,7 @@ Public Class Form1
                     TextLine = objReader.ReadLine()
                     SplitLine = Split(TextLine, ",")
                     Me.DataGridView1.Rows.Add(SplitLine)
+                    Me.DataGridView1.Rows(0).Visible = False
                 Loop
             End Using
         Else
