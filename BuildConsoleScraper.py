@@ -7,6 +7,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 import Util as Util
 
+#options = webdriver.ChromeOptions()
+#options.add_argument('--headless')
+
 driver = webdriver.Chrome()
 
 urls = {}
