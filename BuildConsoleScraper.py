@@ -17,7 +17,7 @@ urls = {}
 def getBuildConsoleUrls(page_size):
     url = f"https://buildconsole.ulti.io/dashboard/654aa1e7340e6379f892796c/builds?page=0&pagesize={page_size}"
     driver.get(url)
-    pipeline = WebDriverWait(driver, 20).until(visibility_of_element_located((By.XPATH, Util.Pipeline_Name_XPATH))).text
+    pipeline = WebDriverWait(driver, 90).until(visibility_of_element_located((By.XPATH, Util.Pipeline_Name_XPATH))).text
 
     if pipeline == "Quality Development" or pipeline == "UKGPro Core Quality Gate":
         print("P0s Pipeline")
@@ -37,7 +37,7 @@ def getBuildConsoleUrls(page_size):
             try:
                 ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
-                driver.find_element(By.XPATH, build_selector + "[6]").click()
+                driver.find_element(By.XPATH, build_selector + "[10]").click()
                 driver.find_element(By.XPATH, Util.Run_Tests_Button_XPATH).click()
 
                 tc_url = driver.find_element(By.XPATH, Util.View_TeamCity_Button_XPATH).get_attribute("href")
@@ -58,6 +58,7 @@ def getBuildConsoleUrls(page_size):
             except Exception:
                 errors = "[!]"
 
+        print(f"Returning: {urls}")
         return urls
     else:
         print(pipeline)
