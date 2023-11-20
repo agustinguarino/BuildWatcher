@@ -12,13 +12,16 @@ for key in urls.keys():
     print(str(key))
 
 driver = webdriver.Chrome()
+file_name = sys.argv[2]
 
 
 headers = "Build #, Build Date, Test Name, Package, Team, Flaky Test, Duration, Stacktrace, Error Category" + "\n"
-with open("C:\Projects\BuildWatcher\errors.csv", "a") as file:
+with open(f"C:\Projects\BuildWatcher\{file_name}.csv", "a") as file:
             file.write(headers)
 
+print("Starting")
 for key in urls.keys():
+    print("Inside")
     url = urls[str(key)]
     failure_elements = []
 
@@ -108,5 +111,5 @@ for key in urls.keys():
         # Write in csv
         data = f"{build_number}|| {build_date}|| {test_name}|| {package}|| {package_team}|| {flaky_test}|| {duration}|| {stacktrace}|| {error_category}".replace(",", ";").replace("||", ",").replace("\n", "") + "\n"
 
-        with open("C:\Projects\BuildWatcher\errors.csv", "a") as file:
+        with open(f"C:\Projects\BuildWatcher\{file_name}.csv", "a") as file:
             file.write(data)
