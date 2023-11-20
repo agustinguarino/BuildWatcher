@@ -1,4 +1,6 @@
 __pycache__/
 errors.csv
 errors*.csv
+*.csv
+*.lnk
 logs.txt
