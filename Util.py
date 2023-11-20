@@ -25,8 +25,8 @@ ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 
 BuildInformation = {}
 
-Error_Types_List = ["TestFixtureSetUp failed", "ElementNotEnabledException", "SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException", "RecordCountNotEqualException", "NoSuchEnvironmentException"]
-Teams_List = ["AcceptanceGHR", "MobileAppApi", "Payroll", "TaxCare", "TaxUs", "GlobalBenefits", "UPM", "ImportTool"]
+Error_Types_List = ["KeyNotFoundException", "IndexOutOfRangeException", "NUnit.Framework.Assert", "InvalidOperationException", "TestFixtureSetUp failed", "ElementNotEnabledException", "SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException", "RecordCountNotEqualException", "NoSuchEnvironmentException"]
+Teams_List = ["ObjectModel", "AcceptanceGHR", "MobileAppApi", "Payroll", "TaxCare", "TaxUs", "GlobalBenefits", "UPM", "ImportTool", "GlobalHR"]
 
 Login_Page_Indicator_XPATH = "//a[contains(text(), 'Login with SSO')]"
 HomePage_Indicator_XPATH = "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]"
@@ -52,4 +52,4 @@ Builds_Table_Row_XPATH = "(//tbody[@role='rowgroup']//tr)[(iterator)]"
 Build_Number_XPATH = Builds_Table_Row_XPATH + "//td//a[@style='text-decoration: unset; color: #3f51b5;']"
 Build_Date_XPATH = Builds_Table_Row_XPATH + "//td//span[@style='font-size: 12px;']"
 Run_Tests_Button_XPATH = "//li[@class='clickable fail ng-star-inserted']"
-View_TeamCity_Button_XPATH = "//a[@class='mat-focus-indicator mat-button mat-button-base']"
+View_TeamCity_Button_XPATH = "(//a[@class='mat-focus-indicator mat-button mat-button-base'])[2]"
