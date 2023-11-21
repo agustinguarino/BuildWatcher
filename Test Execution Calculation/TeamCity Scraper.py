@@ -52,16 +52,16 @@ def login():
 
 def startNavigating():
     for url in urls:
-        driver.get(url)
         print(f"[!] Navigating to: {url}")
-        sleep(2)
+        driver.get(url)
+        sleep(1)
 
         duration = getDuration()
 
         if duration is not False:
             print(f"Test duration: {str(duration)}")
 
-            test_duration = str(datetime.timedelta(seconds= duration))
+            test_duration = str(datetime.timedelta(seconds= int(duration.split(".")[0])))
             logToReport(url, test_duration)
         else:
             print("[WARNING] Error getting test suite duration.")
