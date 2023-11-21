@@ -5,16 +5,37 @@ from selenium.webdriver.support.expected_conditions import visibility_of_element
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
+import datetime
+
+build_id = str(input("[!] Enter build id: "))
+runner_prefix = str(input("[!] Enter runners prefix: ")) # Ask for prefix and combine list of suffixes
+dll_suite_name = "Echo.Automation.UPM.dll" # List of dlls to loop through
+#Echo.Automation.UPM.dll
+pingid_code = str(input("[!] Enter PingID code: "))
+
+dll_suites_list = ["Echo.Automation.UPM.dll", "Echo.Automation.Test.dll", "UltimateSoftware.Payroll.Tests.dll"]
+folder_variations = ["echo", "nunit3"]
+
+runner_names_list = []
+urls = []
 
 driver = webdriver.Chrome()
 
-build_id = int(input("Enter build id: "))
-runner_name = str(input("Enter runner name: "))
-dll_suite_name = str(input("Enter dll suite to search for: "))
+def generateRunnerNames():
+    for i in range(10, 21):
+        runner_name = runner_prefix + str(i)
+        runner_names_list.append(runner_name)
 
-pingid_code = str(input("Enter PingID code: "))
+def parseUrl(runner_name, dll_suite_name, folder_name):
+    url = f"https://teamcity.dev.us.corp/repository/download/UltiPro_V12_4Integration_1Domains_P0QualityGate_00RunTests/{build_id}:id/for_upload_tests.zip!/{runner_name}/{runner_name}/tests/{folder_name}/{dll_suite_name}.xml"
+    return url
 
-url = f"https://teamcity.dev.us.corp/repository/download/UltiPro_V12_4Integration_1Domains_P0QualityGate_00RunTests/{build_id}:id/for_upload_tests.zip!/{runner_name}/{runner_name}/tests/echo/{dll_suite_name}.xml"
+def generateUrls():
+    for runner_name in runner_names_list:
+        for dll_suite in dll_suites_list:
+            for folder in folder_variations:
+                url = parseUrl(runner_name, dll_suite, folder)
+                urls.append(url)
 
 def login():
     driver.get("https://teamcity.dev.us.corp/favorite/projects")
@@ -28,12 +49,50 @@ def login():
     driver.find_element(By.XPATH, "//input[@class='passcode-input']").send_keys(Keys.ENTER)
     sleep(10)
     WebDriverWait(driver, 120).until(visibility_of_element_located((By.XPATH, "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]")))
-    driver.get(url)
-    sleep(2)
+
+def startNavigating():
+    for url in urls:
+        driver.get(url)
+        print(f"[!] Navigating to: {url}")
+        sleep(2)
+
+        duration = getDuration()
+
+        if duration is not False:
+            print(f"Test duration: {str(duration)}")
+
+            test_duration = str(datetime.timedelta(seconds= duration))
+            logToReport(url, test_duration)
+        else:
+            print("[WARNING] Error getting test suite duration.")
 
 def getDuration():
-    duration = driver.find_element(By.XPATH, "(//*[@class='html-attribute-value'])[15]").text
-    print(duration)
+    try:
+        duration = driver.find_element(By.XPATH, "(//*[@class='html-attribute-value'])[15]").text
+    except Exception:
+        duration = False
+    
+    return duration
+
+def logToReport(url, duration):
+    splitted_url = str(url).split("/")
+    runner_name = splitted_url[8]
+    dll_suite = splitted_url[12]
+
+    data = f"{build_id}, {runner_name}, {dll_suite}, {duration}, {url}"
+
+    with open("report.csv", "a") as file:
+        file.write(data + "\n")
+        print("[!] Reported")
+
+
+# Start logic
+generateRunnerNames()
+generateUrls()
+
+for url in urls:
+    print(url + "\n")
 
 login()
-getDuration()
+startNavigating()
+
