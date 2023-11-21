@@ -36,10 +36,10 @@ def generateRunnerNames():
         runner_names_list.append(runner_name)
 
 def parseUrl(runner_name, dll_suite_name, folder_name):
-    #if "UltimateSoftware." in dll_suite_name:
-    #    folder_name = "nunit3"
-    #else:
+    #if "Echo.Automation." in dll_suite_name:
     #    folder_name = "echo"
+    #else:
+    #    folder_name = "nunit3"
         
     url = f"https://teamcity.dev.us.corp/repository/download/UltiPro_V12_4Integration_1Domains_P0QualityGate_00RunTests/{build_id}:id/for_upload_tests.zip!/{runner_name}/{runner_name}/tests/{folder_name}/{dll_suite_name}.xml"
     return url
@@ -65,8 +65,9 @@ def login():
     WebDriverWait(driver, 120).until(visibility_of_element_located((By.XPATH, "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]")))
 
 def startNavigating():
-    for url in urls:
-        print(f"[!] Navigating to: {url}")
+    for i in range(0, len(urls) + 1):
+        url = urls[i]
+        print(f"[!] Navigating to: {url} ({str(i)}/{str(len(urls))})")
         driver.get(url)
 
         duration = getDuration()
