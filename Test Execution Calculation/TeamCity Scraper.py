@@ -6,9 +6,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 import datetime
+from Util import dlls
 
 build_id = str(input("[!] Enter build id: "))
-runner_prefix = str(input("[!] Enter runners prefix: "))
+runner_prefix = str(input("[!] Enter runners prefix: ")).upper()
 pingid_code = str(input("[!] Enter PingID code: "))
 
 dll_suites_list = []
@@ -35,21 +36,28 @@ def generateRunnerNames():
         runner_name = runner_prefix + str(i)
         runner_names_list.append(runner_name)
 
-def parseUrl(runner_name, dll_suite_name, folder_name):
-    #if "Echo.Automation." in dll_suite_name:
-    #    folder_name = "echo"
-    #else:
-    #    folder_name = "nunit3"
+def parseUrl(runner_name, dll_suite_name):
+    if "Echo.Automation." in dll_suite_name:
+        folder_name = "echo"
+    else:
+        folder_name = "nunit3"
         
     url = f"https://teamcity.dev.us.corp/repository/download/UltiPro_V12_4Integration_1Domains_P0QualityGate_00RunTests/{build_id}:id/for_upload_tests.zip!/{runner_name}/{runner_name}/tests/{folder_name}/{dll_suite_name}.xml"
     return url
 
 def generateUrls():
+    #for runner_name in runner_names_list:
+    #    for dll_suite in dll_suites_list:
+    #        for folder in folder_variations:
+    #            url = parseUrl(runner_name, dll_suite, folder)
+    #            urls.append(url)
+
     for runner_name in runner_names_list:
-        for dll_suite in dll_suites_list:
-            for folder in folder_variations:
-                url = parseUrl(runner_name, dll_suite, folder)
-                urls.append(url)
+        dll_suites = dlls[str(runner_name[-2:])]
+        print(f"Suites for runner {runner_name}: {dll_suites}")
+        for dll_suite in dll_suites:
+            url = parseUrl(runner_name, dll_suite)
+            urls.append(url)
 
 def login():
     driver.get("https://teamcity.dev.us.corp/favorite/projects")
@@ -65,12 +73,16 @@ def login():
     WebDriverWait(driver, 120).until(visibility_of_element_located((By.XPATH, "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]")))
 
 def startNavigating():
-    for i in range(0, len(urls) + 1):
+    for i in range(0, len(urls)):
         url = urls[i]
         print(f"[!] Navigating to: {url} ({str(i)}/{str(len(urls))})")
         driver.get(url)
 
-        duration = getDuration()
+        duration = getDuration(False)
+
+        # Retry with new number of element
+        if duration == False:
+            duration = getDuration(True)
 
         if duration is not False:
             print(f"Test duration: {str(duration)}")
@@ -80,9 +92,13 @@ def startNavigating():
         else:
             print("[WARNING] Error getting test suite duration.")
 
-def getDuration():
+def getDuration(retry):
     try:
-        duration = driver.find_element(By.XPATH, "(//*[@class='html-attribute-value'])[15]").text
+        #duration = driver.find_element(By.XPATH, "(//*[@class='html-attribute-value'])[15]").text
+        if retry:
+            duration = driver.find_element(By.CSS_SELECTOR, "#folder0 > div:nth-child(1) > span.html-tag > span:nth-child(15) > span.html-attribute-value").text
+        else:
+            duration = driver.find_element(By.CSS_SELECTOR, "#folder0 > div:nth-child(1) > span.html-tag > span:nth-child(16) > span.html-attribute-value").text
     except Exception:
         duration = False
     
