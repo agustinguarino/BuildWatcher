@@ -21,6 +21,13 @@ urls = []
 
 driver = webdriver.Chrome()
 
+def writeReportHeaders():
+    data = f"Build ID, Runner Name, DLL Suite, Test Duration, XML URL"
+
+    with open("report.csv", "w") as file:
+        file.write(data + "\n")
+        print("[!] Headers added")
+
 def generateRunnerNames():
     for i in range(10, 21):
         runner_name = runner_prefix + str(i)
@@ -54,7 +61,6 @@ def startNavigating():
     for url in urls:
         print(f"[!] Navigating to: {url}")
         driver.get(url)
-        sleep(1)
 
         duration = getDuration()
 
@@ -87,6 +93,7 @@ def logToReport(url, duration):
 
 
 # Start logic
+writeReportHeaders()
 generateRunnerNames()
 generateUrls()
 
