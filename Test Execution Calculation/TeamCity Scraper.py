@@ -13,7 +13,11 @@ dll_suite_name = "Echo.Automation.UPM.dll" # List of dlls to loop through
 #Echo.Automation.UPM.dll
 pingid_code = str(input("[!] Enter PingID code: "))
 
-dll_suites_list = ["Echo.Automation.UPM.dll", "Echo.Automation.Test.dll", "UltimateSoftware.Payroll.Tests.dll"]
+dll_suites_list = []
+with open("dlls_list.txt", "r") as file:
+    lines = file.readlines()
+    [dll_suites_list.append(x.replace("\n", "")) for x in lines if x not in dll_suites_list]
+
 folder_variations = ["echo", "nunit3"]
 
 runner_names_list = []
@@ -34,6 +38,11 @@ def generateRunnerNames():
         runner_names_list.append(runner_name)
 
 def parseUrl(runner_name, dll_suite_name, folder_name):
+    #if "UltimateSoftware." in dll_suite_name:
+    #    folder_name = "nunit3"
+    #else:
+    #    folder_name = "echo"
+        
     url = f"https://teamcity.dev.us.corp/repository/download/UltiPro_V12_4Integration_1Domains_P0QualityGate_00RunTests/{build_id}:id/for_upload_tests.zip!/{runner_name}/{runner_name}/tests/{folder_name}/{dll_suite_name}.xml"
     return url
 
@@ -91,7 +100,6 @@ def logToReport(url, duration):
         file.write(data + "\n")
         print("[!] Reported")
 
-
 # Start logic
 writeReportHeaders()
 generateRunnerNames()
@@ -102,4 +110,3 @@ for url in urls:
 
 login()
 startNavigating()
-
