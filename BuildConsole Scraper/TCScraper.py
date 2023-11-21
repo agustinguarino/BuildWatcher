@@ -3,11 +3,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located
 from time import sleep
-import Util as Util
-import BuildConsoleScraper as bcs
+from .Util import *
+from .BuildConsoleScraper import *
 import sys
 
-urls = bcs.getBuildConsoleUrls(sys.argv[1])
+urls = getBuildConsoleUrls(sys.argv[1])
 for key in urls.keys():
     print(str(key))
 
