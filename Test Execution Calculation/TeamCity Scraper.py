@@ -8,9 +8,7 @@ from time import sleep
 import datetime
 
 build_id = str(input("[!] Enter build id: "))
-runner_prefix = str(input("[!] Enter runners prefix: ")) # Ask for prefix and combine list of suffixes
-dll_suite_name = "Echo.Automation.UPM.dll" # List of dlls to loop through
-#Echo.Automation.UPM.dll
+runner_prefix = str(input("[!] Enter runners prefix: "))
 pingid_code = str(input("[!] Enter PingID code: "))
 
 dll_suites_list = []
