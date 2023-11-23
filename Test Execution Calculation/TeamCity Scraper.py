@@ -21,15 +21,18 @@ folder_variations = ["echo", "nunit3"]
 
 runner_names_list = []
 urls = []
+results = {}
 
 driver = webdriver.Chrome()
 
 def writeReportHeaders():
-    data = f"Build ID, Runner Name, DLL Suite, Test Duration, XML URL"
+    #data = f"Build ID, Runner Name, DLL Suite, Test Duration, XML URL"
 
-    with open("report.csv", "w") as file:
-        file.write(data + "\n")
-        print("[!] Headers added")
+    #with open("report.csv", "w") as file:
+        #file.write(data + "\n")
+        #print("[!] Headers added")
+
+    pass
 
 def generateRunnerNames():
     for i in range(10, 21):
@@ -87,8 +90,8 @@ def startNavigating():
         if duration is not False:
             print(f"Test duration: {str(duration)}")
 
-            test_duration = str(datetime.timedelta(seconds= int(duration.split(".")[0])))
-            logToReport(url, test_duration)
+            #test_duration = str(datetime.timedelta(seconds= int(duration.split(".")[0])))
+            logToReport(url, duration)
         else:
             print("[WARNING] Error getting test suite duration.")
 
@@ -109,11 +112,34 @@ def logToReport(url, duration):
     runner_name = splitted_url[8]
     dll_suite = splitted_url[12]
 
-    data = f"{build_id}, {runner_name}, {dll_suite}, {duration}, {url}"
+    #data = f"{build_id}, {runner_name}, {dll_suite}, {duration}, {url}"
+
+    #with open("report.csv", "a") as file:
+        #file.write(data + "\n")
+        #print("[!] Reported")
+
+    try:
+        results[runner_name] += float(duration)
+        print(f"Saving {float(duration)} in runner {runner_name} for suite {dll_suite}")
+    except Exception:
+        results[runner_name] = float(duration)
+        print(f"Creating {float(duration)} in runner {runner_name} for suite {dll_suite}")
+
+def writeToReport():
+    headers = ""
+    build_data = ""
+
+    for runner in results.keys():
+        headers = f"{headers}{runner},"
+
+        runner_duration = results[runner]
+        build_data = f"{build_data}{str(datetime.timedelta(seconds= int(str(runner_duration).split('.')[0])))},"
+        #build_data = f"{build_data}{str(int(runner_duration/60))},"
 
     with open("report.csv", "a") as file:
-        file.write(data + "\n")
-        print("[!] Reported")
+        file.write("Build Number," + headers + "\n")
+        file.write(build_id + "," + build_data + "\n")
+
 
 # Start logic
 writeReportHeaders()
@@ -125,3 +151,4 @@ for url in urls:
 
 login()
 startNavigating()
+writeToReport()
