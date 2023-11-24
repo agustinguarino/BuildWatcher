@@ -12,10 +12,10 @@ build_id = str(input("[!] Enter build id: "))
 runner_prefix = str(input("[!] Enter runners prefix: ")).upper()
 pingid_code = str(input("[!] Enter PingID code: "))
 
-dll_suites_list = []
-with open("dlls_list.txt", "r") as file:
-    lines = file.readlines()
-    [dll_suites_list.append(x.replace("\n", "")) for x in lines if x not in dll_suites_list]
+#dll_suites_list = []
+#with open("dlls_list.txt", "r") as file:
+#    lines = file.readlines()
+#    [dll_suites_list.append(x.replace("\n", "")) for x in lines if x not in dll_suites_list]
 
 folder_variations = ["echo", "nunit3"]
 
