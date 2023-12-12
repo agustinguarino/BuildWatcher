@@ -26,7 +26,7 @@ ViewInTeamCityButton = "//span[text()=' VIEW IN TEAMCITY '][1]"
 BuildInformation = {}
 
 Error_Types_List = ["AggregateException", "KeyNotFoundException", "IndexOutOfRangeException", "NUnit.Framework.Assert", "InvalidOperationException", "TestFixtureSetUp failed", "ElementNotEnabledException", "SQLException", "NoSuchElementException", "NoSuchRowException", "WebDriverException", "ValuesAreNotEqualException", "NoSuchWindowException", "ElementExistsException", "RecordCountNotEqualException", "NoSuchEnvironmentException"]
-Teams_List = ["GurusWeb", "Organization", "Notifications", "ObjectModel", "AcceptanceGHR", "MobileAppApi", "Payroll", "TaxCare", "TaxUs", "GlobalBenefits", "UPM", "ImportTool", "GlobalHR"]
+Teams_List = ["GurusWeb", "Organization", "Notifications", "ObjectModel", "AcceptanceGHR", "MobileAppApi", "Payroll", "TaxCare", "TaxUs", "CompensationManagement", "UPM", "ImportTool", "GlobalHR"]
 
 Login_Page_Indicator_XPATH = "//a[contains(text(), 'Login with SSO')]"
 HomePage_Indicator_XPATH = "(//span[@class='ProjectsTreeItem__name--uT ring-global-ellipsis'])[1]"
